@@ -40,8 +40,16 @@ public class StudentController {
 	}
 	@PostMapping("/createStudent")
 	@ResponseStatus(code=HttpStatus.CREATED)
-	public void createUser(@RequestBody Student student) {
-		studrep.save(student);
+	public String createUser(@RequestBody Student student) {
+		String msg=null;
+		Student stud=studrep.save(student);
+		if(stud!=null) {
+			msg="Student data Saved Succesfully";
+		}
+		else {
+			msg="Student data not created";
+		}
+		return msg;
 	}
 	@PutMapping("/updateStudent/{id}")
 	public Student updateStudent(@PathVariable int id, @RequestBody Student student) {
